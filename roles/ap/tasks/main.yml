@@ -3,8 +3,13 @@
   apt:
     name: hostapd
     state: present
-    
-- name: Copy hostapd.con
+
+- name: Install dnsmasq
+  apt:
+    name: dnsmasq
+    state: present
+
+- name: Copy hostapd.conf
   copy:
     src: hostapd.conf 
     dest: /etc/hostapd/hostapd.conf
@@ -29,3 +34,15 @@
     protocol: tcp
     jump: DNAT
     to_destination: 192.168.0.1
+  become: yes
+
+- name: Save iptables
+  shell: iptables-save > /etc/iptables.ipv4"
+  become: yes
+
+- name: Copy rc.local
+  copy:
+    src: rc.local
+    dest: /etc/rc.local
+    owner: root
+    mode: 0755
