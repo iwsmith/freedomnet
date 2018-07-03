@@ -1,0 +1,7 @@
+---
+- hosts: freedomnet
+  become: true
+  vars:
+    doc_root: /var/www/html
+  roles:
+    - nginx

@@ -1,0 +1,17 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx-light
+    state: present
+
+- name: Copy new config
+  copy:
+    src: default
+    dest: /etc/nginx/sites-available/
+
+- name: Copy site
+  copy: 
+    src: "{{ role_path }}/files/html/"
+    dest: "{{ doc_root }}"
+    owner: root
+
