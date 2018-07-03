@@ -1,0 +1,31 @@
+---
+- name: Install hostpad
+  apt:
+    name: hostapd
+    state: present
+    
+- name: Copy hostapd.con
+  copy:
+    src: hostapd.conf 
+    dest: /etc/hostapd/hostapd.conf
+    owner: root
+
+- name: Update /etc/default/hostapd
+  copy:
+    content: 'DAEMON_CONF=/etc/hostapd/hostapd.conf'
+    dest: /etc/default/hostapd
+    owner: root
+
+- name: Copy dnsmasq.conf
+  copy:
+    src: dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    owner: root
+
+- name: Set iptables rules
+  iptables:
+    table: nat
+    chain: PREROUTING
+    protocol: tcp
+    jump: DNAT
+    to_destination: 192.168.0.1
