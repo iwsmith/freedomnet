@@ -32,10 +32,3 @@
     src: dnsmasq.conf
     dest: /etc/dnsmasq.conf
     owner: root
-
-- name: Copy rc.local
-  copy:
-    src: rc.local
-    dest: /etc/rc.local
-    owner: root
-    mode: 0755
