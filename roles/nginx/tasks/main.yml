@@ -9,9 +9,10 @@
     src: default
     dest: /etc/nginx/sites-available/
 
-- name: Copy site
-  copy: 
-    src: "{{ role_path }}/files/html/"
+- name: Fetch site content
+  git:
+    repo: "{{ freedomnet_content }}"
     dest: "{{ doc_root }}"
-    owner: root
-
+    version: "{{ content_version }}"
+  notify:
+    - Restart nginx
