@@ -21,6 +21,8 @@ Change line 4 of `inventory.ini` to use your Pi's IP address:
 [freedomnet]
 10.0.1.29 <-- YOUR IP HERE
 ```
+##  Update `roles/nginx/defaults/main.yml`
+Change to match the repo to pull from
 
 ## Run Playbook
 On your host machine (NOT the pi) run:
